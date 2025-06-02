@@ -11,14 +11,17 @@ class AppLogoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      width: AppSpacing.screenWidth(context) * 0.5,
-      height: AppSpacing.screenWidth(context) * 0.5,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.circular(10),
-        color: AppColor.whiteColor,
+    return Card(
+      elevation: 5,
+      child: Container(
+        width: AppSpacing.screenWidth(context) * 0.5,
+        height: AppSpacing.screenWidth(context) * 0.5,
+        decoration: BoxDecoration(
+          borderRadius: BorderRadius.circular(10),
+          color: AppColor.whiteColor,
+        ),
+        child: Image.asset(AssetPath.appLogoPng, fit: BoxFit.fill,),
       ),
-      child: Image.asset(AssetPath.appLogoPng, fit: BoxFit.fill,),
     );
   }
 }
