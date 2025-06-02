@@ -16,4 +16,10 @@ class AppStrings {
 
   static const String capturePhoto = 'Capture Photo';
   static const String proceedToNextScreen = 'Proceed to next screen';
+
+  static const String result = 'Result';
+  static const String coverage = 'Coverage';
+  static const String latitude = 'Latitude';
+  static const String longitude = 'Longitude';
+  static const String timestamp = 'Timestamp';
 }

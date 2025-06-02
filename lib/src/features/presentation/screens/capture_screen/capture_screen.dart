@@ -26,9 +26,17 @@ class CaptureScreen extends StatelessWidget {
               children: [
                 ImagePreviewWidget(),
                 SizedBox(height: AppSpacing.screenHeight(context) * 0.1),
-                ElevatedButton(
-                  onPressed: (){},
-                  child: Text(AppStrings.capturePhoto),
+                GetBuilder<CaptureScreenController>(
+                  builder: (controller) {
+                    return Visibility(
+                      visible: controller.captureInProgress == false,
+                      replacement: const Center(child: CircularProgressIndicator()),
+                      child: ElevatedButton(
+                        onPressed: captureScreenController.captureImage,
+                        child: Text(AppStrings.capturePhoto),
+                      ),
+                    );
+                  }
                 ),
                 SizedBox(height: AppSpacing.screenHeight(context) * 0.02),
                 ElevatedButton(
