@@ -12,6 +12,16 @@ class AppTheme {
       ),
       elevatedButtonTheme: AppElevatedButtonTheme.elevatedButtonTheme,
       textTheme: AppTextTheme.appTextTheme,
+      appBarTheme: AppBarTheme(
+        backgroundColor: AppColor.themeColor,
+        centerTitle: true,
+        iconTheme: IconThemeData(color: AppColor.whiteColor),
+        titleTextStyle: TextStyle(
+          fontSize: 22,
+          color: AppColor.whiteColor,
+          fontWeight: FontWeight.bold,
+        ),
+      )
     );
   }
 }

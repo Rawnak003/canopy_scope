@@ -1,0 +1,45 @@
+import 'package:canopy_coverage/src/features/presentation/screens/capture_screen/controller/capture_screen_controller.dart';
+import 'package:flutter/material.dart';
+import 'package:get/get.dart';
+
+import '../../../../../core/app/app_spacing.dart';
+import '../../../../../core/constants/strings.dart';
+import '../../common_widgets/screen_background.dart';
+import 'widgets/image_preview_widget.dart';
+
+class CaptureScreen extends StatelessWidget {
+  const CaptureScreen({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+
+    CaptureScreenController captureScreenController = Get.find<CaptureScreenController>();
+
+    return SafeArea(
+      child: Scaffold(
+        appBar: AppBar(title: Text(AppStrings.camera)),
+        body: ScreenBackground(
+          child: Padding(
+            padding: const EdgeInsets.all(AppSpacing.pagePadding),
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                ImagePreviewWidget(),
+                SizedBox(height: AppSpacing.screenHeight(context) * 0.1),
+                ElevatedButton(
+                  onPressed: (){},
+                  child: Text(AppStrings.capturePhoto),
+                ),
+                SizedBox(height: AppSpacing.screenHeight(context) * 0.02),
+                ElevatedButton(
+                  onPressed: captureScreenController.proceedToNextScreen,
+                  child: Text(AppStrings.proceedToNextScreen),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}

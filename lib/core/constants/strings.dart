@@ -13,4 +13,7 @@ class AppStrings {
   static const String viewHistory = 'View history';
   static const String aboutUs = 'About Us';
   static const String viewAboutUs = 'View about us';
+
+  static const String capturePhoto = 'Capture Photo';
+  static const String proceedToNextScreen = 'Proceed to next screen';
 }

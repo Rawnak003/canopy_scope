@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../../../core/app/app_spacing.dart';
-import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/strings.dart';
 import '../../common_widgets/screen_background.dart';
 import 'controller/home_nav_controller.dart';
@@ -15,17 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-        appBar: AppBar(
-          title: Text(
-            AppStrings.home,
-            style: Theme.of(context).textTheme.titleLarge?.copyWith(
-              color: AppColor.whiteColor,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          centerTitle: true,
-          backgroundColor: AppColor.themeColor,
-        ),
+        appBar: AppBar(title: Text(AppStrings.home)),
         body: ScreenBackground(
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.pagePadding),
