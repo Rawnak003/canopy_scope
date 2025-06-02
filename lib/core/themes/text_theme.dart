@@ -21,8 +21,13 @@ class AppTextTheme {
         fontWeight: FontWeight.w400,
       ),
       titleMedium: TextStyle(
-        color: AppColor.greyColor,
+        color: AppColor.blackColor,
         fontSize: 16,
+        fontWeight: FontWeight.w400,
+      ),
+      titleSmall: TextStyle(
+        color: AppColor.blackColor,
+        fontSize: 14,
         fontWeight: FontWeight.w400,
       ),
       labelLarge: TextStyle(

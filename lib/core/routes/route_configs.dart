@@ -1,25 +1,17 @@
-import 'package:flutter/material.dart';
-
+import 'package:get/get.dart';
 import '../../src/features/presentation/screens/home/home_screen.dart';
 import '../../src/features/presentation/screens/splash/splash_screen.dart';
 import 'route_names.dart';
 
-class RouteConfigs {
-  static MaterialPageRoute generateRoute(RouteSettings settings) {
-    switch (settings.name) {
-      case RouteName.splash:
-        return MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
-        );
-      case RouteName.home:
-        return MaterialPageRoute(
-          builder: (context) => const HomeScreen(),
-        );
-
-      default:
-        return MaterialPageRoute(
-          builder: (context) => const SplashScreen(),
-        );
-    }
-  }
+class AppRoutes {
+  static final routes = [
+    GetPage(
+      name: RouteName.splash,
+      page: () => const SplashScreen(),
+    ),
+    GetPage(
+      name: RouteName.home,
+      page: () => const HomeScreen(),
+    ),
+  ];
 }

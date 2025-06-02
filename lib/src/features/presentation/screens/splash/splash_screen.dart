@@ -1,23 +1,14 @@
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../../../../../core/app/app_spacing.dart';
 import '../../../../../core/constants/strings.dart';
-import '../../../../../core/routes/route_names.dart';
-import '../../widgets/screen_background.dart';
+import '../../common_widgets/screen_background.dart';
+import 'controller/splash_controller.dart';
 import 'widgets/app_logo_widget.dart';
 
-class SplashScreen extends StatefulWidget {
+class SplashScreen extends StatelessWidget {
   const SplashScreen({super.key});
-
-  @override
-  State<SplashScreen> createState() => _SplashScreenState();
-}
-
-class _SplashScreenState extends State<SplashScreen> {
-
-  _onTapGetStarted() {
-    Navigator.pushReplacementNamed(context, RouteName.home);
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +23,7 @@ class _SplashScreenState extends State<SplashScreen> {
               AppLogoWidget(),
               SizedBox(height: AppSpacing.screenHeight(context) * 0.4),
               ElevatedButton(
-                onPressed: _onTapGetStarted,
+                onPressed: Get.find<SplashController>().onTapGetStarted,
                 child: Text(AppStrings.getStarted),
               ),
               Spacer(),
