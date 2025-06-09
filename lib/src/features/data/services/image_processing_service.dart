@@ -2,21 +2,38 @@ import 'dart:io';
 import 'package:image/image.dart' as img;
 
 class ImageProcessingService {
-  Future<double> calculateCanopyCoverage(String imagePath) async {
-    final imageBytes = await File(imagePath).readAsBytes();
-    final image = img.decodeImage(imageBytes);
-    if (image == null) return 0.0;
+  Future<double> calculateCanopyCoverage(dynamic imagePath) async {
+    img.Image? image = img.decodeImage(File(imagePath).readAsBytesSync());
+
+    if (image == null) {
+      throw Exception('Failed to decode image');
+    }
+
+    const int threshold = 110;
 
     int totalPixels = image.width * image.height;
     int canopyPixels = 0;
 
-    for (int y = 0; y < image.height; y++) {
-      for (int x = 0; x < image.width; x++) {
+    for (var x = 0; x < image.width; x++) {
+      for (var y = 0; y < image.height; y++) {
         final pixel = image.getPixel(x, y);
-        final brightness = img.getLuminance(pixel);
-        if (brightness < 150) canopyPixels++; // threshold
+        final r = pixel.r;
+        final g = pixel.g;
+        final b = pixel.b;
+
+        final brightness = ((r + g + b) / 3).round();
+
+        if (brightness <= threshold) {
+          image.setPixelRgb(x, y, 0, 0, 0); // Black
+          canopyPixels++;
+        } else {
+          image.setPixelRgb(x, y, 255, 255, 255); // White
+        }
       }
     }
-    return (canopyPixels / totalPixels) * 100;
+
+    final double canopyCoverage = (canopyPixels / totalPixels) * 100;
+
+    return canopyCoverage;
   }
 }

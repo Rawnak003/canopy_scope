@@ -39,9 +39,17 @@ class CaptureScreen extends StatelessWidget {
                   }
                 ),
                 SizedBox(height: AppSpacing.screenHeight(context) * 0.02),
-                ElevatedButton(
-                  onPressed: captureScreenController.proceedToNextScreen,
-                  child: Text(AppStrings.proceedToNextScreen),
+                GetBuilder<CaptureScreenController>(
+                    builder: (controller) {
+                      return Visibility(
+                        visible: controller.processingInProgress == false,
+                        replacement: const Center(child: CircularProgressIndicator()),
+                        child: ElevatedButton(
+                          onPressed: captureScreenController.proceedToNextScreen,
+                          child: Text(AppStrings.proceedToNextScreen),
+                        ),
+                      );
+                    }
                 ),
               ],
             ),

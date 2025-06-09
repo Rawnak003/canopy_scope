@@ -21,7 +21,7 @@ class AppRoutes {
     ),
     GetPage(
       name: RouteName.result,
-      page: () => const ResultScreen(),
+      page: () => ResultScreen(entry: Get.arguments),
     ),
   ];
 }
