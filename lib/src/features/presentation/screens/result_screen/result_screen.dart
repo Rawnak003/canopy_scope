@@ -14,11 +14,11 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(title: Text(AppStrings.result)),
-        body: SingleChildScrollView(
-          child: ScreenBackground(
+    return Scaffold(
+      appBar: AppBar(title: Text(AppStrings.result)),
+      body: SafeArea(
+        child: ScreenBackground(
+          child: SingleChildScrollView(
             child: Padding(
               padding: const EdgeInsets.all(AppSpacing.pagePadding),
               child: Center(
@@ -45,18 +45,6 @@ class ResultScreen extends StatelessWidget {
                           child: TextField(
                             decoration: InputDecoration(
                               hintText: '110',
-                              border: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: AppColor.themeColor),
-                              ),
-                              focusedBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: AppColor.themeColor),
-                              ),
-                              enabledBorder: OutlineInputBorder(
-                                borderRadius: BorderRadius.circular(10),
-                                borderSide: BorderSide(color: AppColor.themeColor),
-                              ),
                             ),
                           ),
                         ),

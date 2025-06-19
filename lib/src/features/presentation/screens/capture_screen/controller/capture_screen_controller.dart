@@ -1,6 +1,8 @@
 import 'dart:async';
 import 'dart:io';
 import 'package:canopy_coverage/src/features/data/models/canopy_entry_model.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:path_provider/path_provider.dart';
@@ -22,7 +24,7 @@ class CaptureScreenController extends GetxController {
       final picker = ImagePicker();
       final pickedFile = await picker.pickImage(
         source: ImageSource.camera,
-        imageQuality: 85, // reduce size without major loss
+        imageQuality: 85,
       );
 
       if (pickedFile != null) {
@@ -39,23 +41,29 @@ class CaptureScreenController extends GetxController {
     }
   }
 
+  void showLoadingAndProceed() {
+    processingInProgress = true;
+    update();
+
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      proceedToNextScreen();
+    });
+  }
+
+
   Future<void> proceedToNextScreen() async {
     if (capturedImage == null) {
       Get.snackbar('Error', 'Please capture an image first');
       return;
     }
-
+    processingInProgress = true;
+    update();
+    await Future.delayed(Duration.zero);
     try {
-      processingInProgress = true;
-      update();
-
-      final coverage = await ImageProcessingService()
-          .calculateCanopyCoverage(capturedImage!.path)
-          .timeout(const Duration(seconds: 10)); // Add timeout
-
-      if (coverage == 0.0) {
-        throw Exception('Image processing returned invalid result');
-      }
+      final coverage = await compute(
+        calculateCanopyCoverageSync,
+        capturedImage!.path,
+      );
 
       final location = await LocationService().getCurrentLocation();
 
@@ -66,15 +74,18 @@ class CaptureScreenController extends GetxController {
         longitude: location.longitude,
         timestamp: DateTime.now(),
       );
-
-      Get.toNamed(RouteName.result, arguments: entry);
+      gotoResultScreen(entry);
     } on TimeoutException {
       Get.snackbar('Error', 'Processing timed out');
     } catch (e) {
-      Get.snackbar('Error', 'Processing failed: ${e.toString()}');
+      Get.snackbar('Error', 'Processing failed');
     } finally {
       processingInProgress = false;
       update();
     }
+  }
+
+  void gotoResultScreen(CanopyEntryModel entry) {
+    Get.toNamed(RouteName.result, arguments: entry);
   }
 }

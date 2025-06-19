@@ -12,10 +12,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(title: Text(AppStrings.home)),
-        body: ScreenBackground(
+    return Scaffold(
+      appBar: AppBar(title: Text(AppStrings.home)),
+      body: SafeArea(
+        child: ScreenBackground(
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.pagePadding),
             child: _buildMenu(),

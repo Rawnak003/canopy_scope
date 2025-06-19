@@ -15,10 +15,10 @@ class CaptureScreen extends StatelessWidget {
 
     CaptureScreenController captureScreenController = Get.find<CaptureScreenController>();
 
-    return SafeArea(
-      child: Scaffold(
-        appBar: AppBar(title: Text(AppStrings.camera)),
-        body: ScreenBackground(
+    return Scaffold(
+      appBar: AppBar(title: Text(AppStrings.camera)),
+      body: SafeArea(
+        child: ScreenBackground(
           child: Padding(
             padding: const EdgeInsets.all(AppSpacing.pagePadding),
             child: Column(
@@ -45,7 +45,7 @@ class CaptureScreen extends StatelessWidget {
                         visible: controller.processingInProgress == false,
                         replacement: const Center(child: CircularProgressIndicator()),
                         child: ElevatedButton(
-                          onPressed: captureScreenController.proceedToNextScreen,
+                          onPressed: captureScreenController.showLoadingAndProceed,
                           child: Text(AppStrings.proceedToNextScreen),
                         ),
                       );

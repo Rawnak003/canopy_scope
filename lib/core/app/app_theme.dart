@@ -1,3 +1,4 @@
+import 'package:canopy_coverage/core/themes/input_decoration_theme.dart';
 import 'package:flutter/material.dart';
 
 import '../constants/colors.dart';
@@ -12,6 +13,7 @@ class AppTheme {
       ),
       elevatedButtonTheme: AppElevatedButtonTheme.elevatedButtonTheme,
       textTheme: AppTextTheme.appTextTheme,
+      inputDecorationTheme: AppInputDecoration.inputDecoration,
       appBarTheme: AppBarTheme(
         backgroundColor: AppColor.themeColor,
         centerTitle: true,
