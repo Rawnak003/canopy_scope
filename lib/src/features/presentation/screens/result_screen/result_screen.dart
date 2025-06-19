@@ -1,6 +1,6 @@
-import 'dart:io';
-
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:image/image.dart' as img;
 import '../../../../../core/app/app_spacing.dart';
 import '../../../../../core/constants/colors.dart';
 import '../../../../../core/constants/strings.dart';
@@ -14,6 +14,8 @@ class ResultScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final pngBytes = img.encodePng(entry.image!);
+
     return Scaffold(
       appBar: AppBar(title: Text(AppStrings.result)),
       body: SafeArea(
@@ -27,7 +29,7 @@ class ResultScreen extends StatelessWidget {
                     SizedBox(
                       width: AppSpacing.screenWidth(context),
                       height: AppSpacing.screenHeight(context) * 0.5,
-                      child: Image.file(File(entry.imagePath), fit: BoxFit.contain),
+                      child:  Image.memory(Uint8List.fromList(pngBytes), fit: BoxFit.contain,),
                     ),
                     SizedBox(height: AppSpacing.screenHeight(context) * 0.02),
                     Row(

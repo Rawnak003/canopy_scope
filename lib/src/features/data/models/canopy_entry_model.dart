@@ -1,5 +1,6 @@
 class CanopyEntryModel {
   final String imagePath;
+  final dynamic image;
   final double coverage;
   final double latitude;
   final double longitude;
@@ -7,6 +8,7 @@ class CanopyEntryModel {
 
   CanopyEntryModel({
     required this.imagePath,
+    required this.image,
     required this.coverage,
     required this.latitude,
     required this.longitude,

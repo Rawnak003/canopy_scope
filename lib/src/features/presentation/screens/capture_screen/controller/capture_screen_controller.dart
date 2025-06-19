@@ -60,15 +60,16 @@ class CaptureScreenController extends GetxController {
     update();
     await Future.delayed(Duration.zero);
     try {
-      final coverage = await compute(
-        calculateCanopyCoverageSync,
-        capturedImage!.path,
-      );
+      final result = await compute(adaptiveThresholdingFast, capturedImage!.path);
+
+      final thresholdedImage = result.image;
+      final coverage = result.coverage;
 
       final location = await LocationService().getCurrentLocation();
 
       final entry = CanopyEntryModel(
         imagePath: capturedImage!.path,
+        image: thresholdedImage,
         coverage: coverage,
         latitude: location.latitude,
         longitude: location.longitude,
@@ -78,7 +79,7 @@ class CaptureScreenController extends GetxController {
     } on TimeoutException {
       Get.snackbar('Error', 'Processing timed out');
     } catch (e) {
-      Get.snackbar('Error', 'Processing failed');
+      Get.snackbar('Error', 'Processing failed $e');
     } finally {
       processingInProgress = false;
       update();
